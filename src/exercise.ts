@@ -4,5 +4,5 @@ export class Exercise {
   id: number;
   name: string;
   description: string;
-  muscleGroup: MuscleGroup;
+  muscleGroups: MuscleGroup[];
 }
