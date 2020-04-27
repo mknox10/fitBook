@@ -9,7 +9,7 @@ import {ExerciseService} from './exercise.service';
 export class WorkoutService {
 
   workouts: Workout[] = [];
-  id: 0;
+  id: number = 0;
 
   constructor(private exerciseService: ExerciseService) {
     this.createWorkout(

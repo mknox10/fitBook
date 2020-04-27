@@ -9,7 +9,7 @@ import {MuscleGroups} from './muscle-groups';
 export class ExerciseService {
 
   exercises: Exercise[] = [];
-  id: 0;
+  id: number = 0;
 
   constructor() {
     this.createExercise(
