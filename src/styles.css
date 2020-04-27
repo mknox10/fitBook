@@ -1,6 +1,44 @@
 #logo-img {
     width: 3rem;
 }
+
 .header {
     font-weight: bold;
 }
+
+#left {
+    text-align: center;
+    float: left;
+    width: 50%;
+  }
+  
+  #right {
+    text-align: center;
+    float: right;
+    width: 50%;
+  }
+  
+  #buttons {
+    text-align: right;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+  .table {
+    text-align: center;
+    display: inline-table;
+    margin: 1rem;
+    width: 40%;
+  }
+  
+  .jumbotron {
+    padding: 1rem;
+    margin: 0;
+  }
+  
+  .btn {
+    width: 20% !important;
+    margin: .25rem;
+  }

@@ -1,0 +1,40 @@
+<div class="container center">
+    <h2 class="display-5">{{record.exercise.name}}</h2>
+    <div class="center jumbotron">
+        <p>{{record.exercise.description}}</p>
+        <h3 id="left">Target</h3>
+        <h3 id="right" *ngIf="record.actualSets.length !== 0">Actual</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Reps</th>
+                    <td *ngFor="let goal of record.targetSets">{{goal.reps}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">Weight</th>
+                    <td *ngFor="let goal of record.targetSets">{{goal.weight}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table" *ngIf="record.actualSets.length !== 0">
+            <thead>
+                <tr>
+                    <th scope="col">Reps</th>
+                    <td *ngFor="let goal of record.actualSets">{{goal.reps}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">Weight</th>
+                    <td *ngFor="let goal of record.actualSets">{{goal.weight}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="buttons">
+        <button type="button" class="btn btn-outline-primary">Edit</button>
+        <button type="button" class="btn btn-outline-danger">Remove</button>
+    </div>
+</div>
