@@ -1,0 +1,59 @@
+body{
+    background-color: lightgray;
+    font-family: sans-serif
+}
+
+div{
+    display: inline-block;
+}
+
+#exercise-listing-container {
+    vertical-align: top;
+    width: 55%;
+}
+
+#add-exercise-container {
+    vertical-align: top;
+    width: 40%;
+}
+
+.grouping-container {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    width: 95%;
+}
+
+.exercise-listing {
+    background-color: lightgray;
+    margin: 10px 5px 10px 5px;
+    padding-bottom: 10px;
+    width: 95%;
+    height: 75px;
+}
+
+p {
+    margin: 15px 5px 5px 10px;
+}
+
+.add-exercise-field {
+    vertical-align: top;
+    background-color: lightgray;
+    padding: 25px 10px 0px 10px;
+    margin: 5px 5px 5px 5px;
+    width: 90%;
+    height: 50px;
+}
+
+.add-exercise-input {
+    width: 95%;
+    margin-top: 5px;
+}
+
+button{
+    margin: auto;
+    display: block;
+    margin-top: 5px;
+    font-size: large;
+    width: 40%;
+    height: 70px;
+}
