@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Workout } from 'src/workout';
 import { Exercise } from 'src/exercise';
+import { Record } from 'src/record';
 import { ExerciseService } from '../exercise.service';
 import { WorkoutService } from '../workout.service';
 
@@ -19,18 +20,38 @@ export class WorkoutComponent implements OnInit {
   actualTotalSets: number = 0;
   actualTotalReps: number = 0;
 
+  es: ExerciseService = new ExerciseService();
+  ws: WorkoutService = new WorkoutService(this.es);
+
   constructor() { }
 
   ngOnInit(): void {
+    this.workout = this.ws.getWorkout(0);
+
+    this.SummaryStatistics();
+  }
+
+  beginWorkout(): void {
+
+  }
+
+  removeRecord(record : Record): void {
+    this.ws.removeRecord(this.workout, record);
+  }
+
+  saveRecord(record: Record): void {
+    this.ws.saveRecord(this.workout, record);
+  }
+
+  /*Calculate Workout Summary Statistics*/
+  SummaryStatistics() {
     this.workout.records.forEach((record) => {
-      this.targetTotalSets += record.targetSets.length;
-      this.actualTotalSets += record.actualSets.length;
-      record.targetSets.forEach((set) => {
-        this.targetTotalReps++;
-      });
-      record.actualSets.forEach((set) => {
-        this.actualTotalReps++;
-      });
+      this.targetTotalSets += 1;
+      if (record.actualSets.length > 0) {
+      this.actualTotalSets += 1;
+      }
+      this.targetTotalReps += record.targetSets.length;
+      this.actualTotalReps += record.actualSets.length;
     });
   }
 }

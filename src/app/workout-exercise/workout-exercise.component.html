@@ -1,40 +1,61 @@
 <div class="container center">
-    <h2 class="display-5">{{record.exercise.name}}</h2>
     <div class="center jumbotron">
-        <p>{{record.exercise.description}}</p>
-        <h3 id="left">Target</h3>
-        <h3 id="right" *ngIf="record.actualSets.length !== 0">Actual</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Reps</th>
-                    <td *ngFor="let goal of record.targetSets">{{goal.reps}}</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="col">Weight</th>
-                    <td *ngFor="let goal of record.targetSets">{{goal.weight}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table" *ngIf="record.actualSets.length !== 0">
-            <thead>
-                <tr>
-                    <th scope="col">Reps</th>
-                    <td *ngFor="let goal of record.actualSets">{{goal.reps}}</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="col">Weight</th>
-                    <td *ngFor="let goal of record.actualSets">{{goal.weight}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="show_edit !== true">
+            <h2 class="display-5">{{record.exercise.name}}</h2>
+            <p>{{record.exercise.description}}</p>
+            <h3 id="left">Target</h3>
+            <h3 id="right" *ngIf="record.actualSets.length !== 0">Actual</h3>
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>   </th>
+                        <th *ngIf="record.targetSets.length > 0" scope="col">Set 1</th>
+                        <th *ngIf="record.targetSets.length > 1" scope="col">Set 2</th>
+                        <th *ngIf="record.targetSets.length > 2" scope="col">Set 3</th>
+                        <th *ngIf="record.targetSets.length > 3" scope="col">Set 4</th>
+                        <th *ngIf="record.targetSets.length > 4" scope="col">Set 5</th>
+                        <th *ngIf="record.targetSets.length > 5" scope="col">Set 6</th>
+                        <th *ngIf="record.targetSets.length > 6" scope="col">Set 7</th>
+                        <th *ngIf="record.targetSets.length > 7" scope="col">Set 8</th>
+                        <th *ngIf="record.targetSets.length > 8" scope="col">Set 9</th>
+                        <th *ngIf="record.targetSets.length > 9" scope="col">Set 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="col">Reps</th>
+                        <td *ngFor="let goal of record.targetSets">{{goal.reps}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Weight</th>
+                        <td *ngFor="let goal of record.targetSets">{{goal.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table" *ngIf="record.actualSets.length !== 0">
+                <thead>
+                    <tr>
+                        <th scope="col">Reps</th>
+                        <td *ngFor="let goal of record.actualSets">{{goal.reps}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="col">Weight</th>
+                        <td *ngFor="let goal of record.actualSets">{{goal.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="show_edit === true">
+            <app-workout-add-exercise [record]="record" (save_add_exercise)="saveRecord($event)"></app-workout-add-exercise>
+        </div>
     </div>
     <div id="buttons">
-        <button type="button" class="btn btn-outline-primary">Edit</button>
-        <button type="button" class="btn btn-outline-danger">Remove</button>
+        <button type="button" class="btn btn-outline-primary" *ngIf="show_edit !== true" (click)="show_edit = !show_edit">Edit</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="show_edit === true" (click)="show_edit = !show_edit">Cancel</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="show_remove !== true" (click)="show_remove = !show_remove">Remove</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="show_remove === true" (click)="removeRecord()">Yes I Want To Remove This Exercise</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="show_remove === true" (click)="show_remove = !show_remove">Cancel</button>
     </div>
 </div>

@@ -1,12 +1,14 @@
 <div class="container">
-    <h1 id="header_row">{{workout.name}}</h1>
+    <div id="header_row">
+        <h1>{{workout.name}}</h1>
+    </div>
     <div *ngFor="let record of workout.records">
-        <app-workout-exercise [record] = "record"></app-workout-exercise>
+        <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)" (save_exercise)="saveRecord($event)"></app-workout-exercise>
     </div>
     <hr class="my-4">
     <div id="buttons">
         <button type="button" class="btn btn-outline-primary">Add Exercise</button>
-        <button type="button" class="btn btn-outline-success">Begin Workout</button>
+        <button type="button" class="btn btn-outline-primary" (click)="beginWorkout()">Begin Workout</button>
     </div>
     <hr class="my-4">
     <h3 class= "center">Workout Summary</h3>

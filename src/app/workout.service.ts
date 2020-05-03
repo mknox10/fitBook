@@ -100,4 +100,16 @@ export class WorkoutService {
   saveWorkout(workout: Workout) {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
   }
+
+  removeRecord(workout: Workout, record: Record) {
+    const index: number = workout.records.indexOf(record);
+    if (index !== -1) {
+      workout.records.splice(index,1);
+    }
+    console.log("Exercise Removed Successfully");
+  }
+
+  saveRecord(workout: Workout, record: Record) {
+    console.log("Exercise Saved Successfully")
+  }
 }
