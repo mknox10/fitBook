@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
-import {Record} from '../record';
+import {Record} from 'src/record';
 import {ExerciseService} from './exercise.service';
 import { Exercise } from 'src/exercise';
 
@@ -90,6 +90,14 @@ export class WorkoutService {
     return this.workouts[0];
   }
 
+  cloneWorkout(workout: Workout): Workout {
+    let records: Record[] = workout.records;
+    records.forEach(set => {
+      set.actualSets = [];
+    })
+    return this.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
+  }
+
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
       id: this.id++,
@@ -118,7 +126,7 @@ export class WorkoutService {
     }
     console.log("Exercise Removed Successfully");
   }
-  
+
   addRecord(workout: Workout): Record {
     //TODO: clean this up, this shit is a mess.
     let record: Record = new Record();

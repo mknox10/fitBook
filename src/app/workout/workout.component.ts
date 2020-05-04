@@ -25,6 +25,10 @@ export class WorkoutComponent implements OnInit {
   actualTotalReps: number = 0;
 
   in_progress: boolean;
+  previous_workout: boolean;
+  change_name: boolean;
+  date: String;
+  newName: string;
 
   es: ExerciseService;
   ws: WorkoutService;
@@ -38,20 +42,42 @@ export class WorkoutComponent implements OnInit {
 
     if (this.workout === undefined) {
       this.workout = this.ws.loadWorkout();
-    } else {
-      
     }
+    this.date = this.workout.date.toLocaleString();
+    this.change_name = false;
+    this.newName = "";
+    this.previousWorkoutCheck();
     this.SummaryStatistics();
   }
 
+  previousWorkoutCheck(): void {
+    this.previous_workout = false;
+    this.workout.records.forEach(set => {
+      if (set.actualSets.length !== 0) {
+        this.previous_workout = true;
+      }
+    });
+  }
+
+  changeName(): void {
+    this.change_name = false;
+    this.workout.name = this.newName;
+    this.newName = "";
+  }
+
+  cloneWorkout(): void {
+    this.previous_workout = !this.previous_workout;
+    this.workout = this.ws.cloneWorkout(this.workout);
+  }
+
   beginWorkout(): void {
-    //TODO: Do not allow workout to begin if it has previously been completed
     this.in_progress = true;
     console.log("Beginning Workout");
   }
 
   finishWorkout(): void {
     this.in_progress = false;
+    this.previousWorkoutCheck();
     console.log("Finishing Workout");
   }
 
