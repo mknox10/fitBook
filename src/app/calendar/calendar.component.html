@@ -1,1 +1,35 @@
-<p>calendar works!</p>
+<div class="container">  
+    <div class="row">
+        <div class="col-3">
+            <p></p>
+            <p></p>
+            <h5>Click to Add New Workout:</h5>
+            <button class="btn btn-primary" routerLink="/workout">Add Workout</button>
+            <hr>
+            <h5>Select past workout</h5>
+            <div>
+                <form [formGroup] = "addPastWorkoutForm" (ngSubmit)="addPastWorkout()">
+                    <div class="dropdown form-group">
+                        <select formControlName="workout" class="form-control btn btn-primary">
+                            <option class="dropdown-item" *ngFor="let workout of workoutsList" [id]="workout.id">{{workout.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" formControlName="title" placeholder="title">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="date" formControlName="date" placeholder="date (yyyy-mm-dd)">
+                    </div>
+                    <div>  
+                        <button class="btn btn-primary" type="submit">Add Past Workout</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" deepChangeDetection="true" [events]="calendarWorkouts"></full-calendar>
+        </div>
+    </div>
+</div>
+
+
