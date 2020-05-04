@@ -1,1 +1,46 @@
-<p>exercise-list works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="exercise-list.component.css">
+</head>
+<body>
+    <div id="exercise-listing-container">
+        <h2><b><u>Exercises:</u></b></h2>
+        <div class="grouping-container" >
+            <div class="exercise-listing">
+                <p>*Name*: *Muscle Group*</p>
+                <p>&emsp;*Description*</p>
+            </div>
+            <div class="exercise-listing">
+                <p>*Name*: *Muscle Group*</p>
+                <p>&emsp;*Description*</p>
+            </div>
+            <div class="exercise-listing">
+                <p>*Name*: *Muscle Group*</p>
+                <p>&emsp;*Description*</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="add-exercise-container">
+        <form [formGroup] = "addExerciseFormGroup" style="display: inline-block;">
+            <h2><b><u>Add Exercise:</u></b></h2>
+            <div class="grouping-container" >
+                <div class="add-exercise-field">
+                    Exercise Name: <input type="text" formControlName="name" class="add-exercise-input" id="name-input" />
+                </div>
+                <div class="add-exercise-field">
+                    Description: <input type="text" formControlName="description" class="add-exercise-input" id="description-input"/>
+                </div>
+                <div class="add-exercise-field">
+                    Muscle Group: <input type="text" formControlName="muscleGroups" class="add-exercise-input" id="muscle-group-input"/>
+                </div>
+                <button type="submit" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Submit</b></button>     
+            </div>
+        </form>
+    </div>   
+</body>
+</html>
