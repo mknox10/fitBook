@@ -22,13 +22,13 @@ export class WorkoutAddExerciseComponent implements OnInit {
   numSets: number = 0; //specifies the number of sets, max is 10
 
   constructor(private fb: FormBuilder) { }
-  
+
   ngOnInit(): void {
     this.exerciseList = this.es.getExercises();
 
     let sets = this.record.targetSets;
     this.exerciseForm = this.fb.group({
-      exerciseControl: this.record.exercise,
+      exerciseControl: this.record.exercise.id,
       /** couldn't find a way to use a dynamic number of form controls,
           so I ended up hardcoding the form controls like so **/
       repsFormGroup: new FormGroup({
@@ -62,77 +62,77 @@ export class WorkoutAddExerciseComponent implements OnInit {
 
   save(): void {
     let targetSets: Set[] = [];
-    this.record.exercise = this.exerciseForm.get('exerciseControl').value;
+    this.record.exercise = this.exerciseList.find(x => x.id == this.exerciseForm.get('exerciseControl').value);
     /** I really wish I knew of a way to create a dynamic number of form controls.
         This is not ideal **/
     if (this.exerciseForm.get('repsFormGroup').get('reps1').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps1').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight1').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps2').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps2').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight2').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps3').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps3').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight3').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps4').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps4').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight4').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps5').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps5').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight5').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps6').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps6').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight6').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps7').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps7').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight7').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps8').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps8').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight8').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps9').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps9').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight9').value
-      } 
+      }
       targetSets.push(set);
     }
     if (this.exerciseForm.get('repsFormGroup').get('reps10').value !== 0 ) {
       let set: Set = {
         reps: this.exerciseForm.get('repsFormGroup').get('reps10').value,
         weight: this.exerciseForm.get('weightFormGroup').get('weight10').value
-      } 
+      }
       targetSets.push(set);
     }
     this.record.targetSets = targetSets;
