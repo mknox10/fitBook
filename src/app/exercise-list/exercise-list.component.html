@@ -26,19 +26,19 @@
     </div>
     
     <div id="add-exercise-container">
-        <form style="display: inline-block;">
+        <form [formGroup] = "addExerciseFormGroup" style="display: inline-block;">
             <h2><b><u>Add Exercise:</u></b></h2>
             <div class="grouping-container" >
                 <div class="add-exercise-field">
-                    Exercise Name: <input type="text" class="add-exercise-input"/>
+                    Exercise Name: <input type="text" formControlName="name" class="add-exercise-input" id="name-input" />
                 </div>
                 <div class="add-exercise-field">
-                    Description: <input type="text" class="add-exercise-input"/>
+                    Description: <input type="text" formControlName="description" class="add-exercise-input" id="description-input"/>
                 </div>
                 <div class="add-exercise-field">
-                    Muscle Group: <input type="text" class="add-exercise-input"/>
+                    Muscle Group: <input type="text" formControlName="muscleGroups" class="add-exercise-input" id="muscle-group-input"/>
                 </div>
-                <button type="submit" name="submit-button" id="submit-button"><b>Submit</b></button>     
+                <button type="submit" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Submit</b></button>     
             </div>
         </form>
     </div>   
