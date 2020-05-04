@@ -9,6 +9,7 @@ import { ExerciseListComponent } from './exercise-list/exercise-list.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { WorkoutExerciseComponent } from './workout-exercise/workout-exercise.component';
 import { WorkoutAddExerciseComponent } from './workout-add-exercise/workout-add-exercise.component';
+import { WorkoutInProgressComponent } from './workout-in-progress/workout-in-progress.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { WorkoutAddExerciseComponent } from './workout-add-exercise/workout-add-
     ExerciseListComponent,
     WorkoutComponent,
     WorkoutExerciseComponent,
-    WorkoutAddExerciseComponent
+    WorkoutAddExerciseComponent,
+    WorkoutInProgressComponent
   ],
   imports: [
     BrowserModule,

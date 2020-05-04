@@ -1,36 +1,28 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { Record } from 'src/record';
-import { Exercise } from 'src/exercise';
 import { Set } from 'src/set';
-import { ExerciseService } from '../exercise.service';
 
 @Component({
-  selector: 'app-workout-add-exercise',
-  templateUrl: './workout-add-exercise.component.html',
-  styleUrls: ['./workout-add-exercise.component.css']
+  selector: 'app-workout-in-progress',
+  templateUrl: './workout-in-progress.component.html',
+  styleUrls: ['./workout-in-progress.component.css']
 })
-export class WorkoutAddExerciseComponent implements OnInit {
+export class WorkoutInProgressComponent implements OnInit {
 
   @Input() record: Record;
-  @Output() save_add_exercise = new EventEmitter<Record>();
 
-  es: ExerciseService = new ExerciseService();
-  exerciseList: Exercise[];
   exerciseForm: FormGroup;
-  numSets: number = 0; //specifies the number of sets, max is 10
+  numSets: number = 0;
+  exercise_complete: boolean;
 
   constructor(private fb: FormBuilder) { }
-  
-  ngOnInit(): void {
-    this.exerciseList = this.es.getExercises();
 
+  ngOnInit(): void {
+    this.exercise_complete = false;
     let sets = this.record.targetSets;
     this.exerciseForm = this.fb.group({
-      exerciseControl: this.record.exercise,
-      /** couldn't find a way to use a dynamic number of form controls,
-          so I ended up hardcoding the form controls like so **/
       repsFormGroup: new FormGroup({
         "reps1": new FormControl(sets.length > 0 ? sets[0].reps : 0),
         "reps2": new FormControl(sets.length > 1 ? sets[1].reps : 0),
@@ -56,88 +48,7 @@ export class WorkoutAddExerciseComponent implements OnInit {
         "weight10": new FormControl(sets.length > 9 ? sets[9].weight : 0),
       }),
     });
-
-    this.numSets = sets.length;
-  }
-
-  save(): void {
-    let targetSets: Set[] = [];
-    this.record.exercise = this.exerciseForm.get('exerciseControl').value;
-    /** I really wish I knew of a way to create a dynamic number of form controls.
-        This is not ideal **/
-    if (this.exerciseForm.get('repsFormGroup').get('reps1').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps1').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight1').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps2').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps2').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight2').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps3').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps3').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight3').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps4').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps4').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight4').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps5').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps5').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight5').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps6').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps6').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight6').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps7').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps7').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight7').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps8').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps8').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight8').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps9').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps9').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight9').value
-      } 
-      targetSets.push(set);
-    }
-    if (this.exerciseForm.get('repsFormGroup').get('reps10').value !== 0 ) {
-      let set: Set = {
-        reps: this.exerciseForm.get('repsFormGroup').get('reps10').value,
-        weight: this.exerciseForm.get('weightFormGroup').get('weight10').value
-      } 
-      targetSets.push(set);
-    }
-    this.record.targetSets = targetSets;
-
-    this.save_add_exercise.emit(this.record);
+    this.numSets = this.record.targetSets.length;
   }
 
   addSet(): void {
@@ -187,5 +98,81 @@ export class WorkoutAddExerciseComponent implements OnInit {
       this.exerciseForm.get('weightFormGroup').get('weight10').setValue(0);
     }
     this.numSets--;
+  }
+
+  finishSet(): void {
+    this.exercise_complete = true;
+    let actualSets: Set[] = [];
+    if (this.exerciseForm.get('repsFormGroup').get('reps1').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps1').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight1').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps2').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps2').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight2').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps3').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps3').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight3').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps4').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps4').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight4').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps5').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps5').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight5').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps6').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps6').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight6').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps7').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps7').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight7').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps8').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps8').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight8').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps9').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps9').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight9').value
+      } 
+      actualSets.push(set);
+    }
+    if (this.exerciseForm.get('repsFormGroup').get('reps10').value !== 0 ) {
+      let set: Set = {
+        reps: this.exerciseForm.get('repsFormGroup').get('reps10').value,
+        weight: this.exerciseForm.get('weightFormGroup').get('weight10').value
+      } 
+      actualSets.push(set);
+    }
+    this.record.actualSets = actualSets;
   }
 }

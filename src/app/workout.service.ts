@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
 import {Record} from '../record';
 import {ExerciseService} from './exercise.service';
+import { Exercise } from 'src/exercise';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,13 @@ export class WorkoutService {
     return this.workouts.find(w => w.id === id);
   }
 
+  loadWorkout(): Workout {
+    if (this.workouts.length === 0) {
+      //TODO: return new workout
+    }
+    return this.workouts[0];
+  }
+
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
       id: this.id++,
@@ -101,15 +109,35 @@ export class WorkoutService {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
   }
 
-  removeRecord(workout: Workout, record: Record) {
+
+  /** These should probobly be their own record service **/
+  removeRecord(workout: Workout, record: Record): void {
     const index: number = workout.records.indexOf(record);
     if (index !== -1) {
       workout.records.splice(index,1);
     }
     console.log("Exercise Removed Successfully");
   }
+  
+  addRecord(workout: Workout): Record {
+    //TODO: clean this up, this shit is a mess.
+    let record: Record = new Record();
+    let exercise: Exercise = new Exercise();
+    exercise.name = "";
+    record.exercise = exercise;
+    record.targetSets = [{reps: 0,
+                      weight: 0},
+                      {reps: 0,
+                      weight: 0},
+                      {reps: 0,
+                      weight: 0}];
+    record.actualSets = [];
 
-  saveRecord(workout: Workout, record: Record) {
-    console.log("Exercise Saved Successfully")
+    workout.records.push(record);
+
+    console.log(exercise.id);
+
+    console.log("Exercise Added Successfully");
+    return record;
   }
 }
