@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ExerciseService } from 'src/app/exercise.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Exercise } from 'src/exercise';
+import { MuscleGroup } from 'src/muscle-group';
+import {MuscleGroups} from 'src/app/muscle-groups';
+
 
 @Component({
   selector: 'app-exercise-list',
@@ -10,7 +13,8 @@ import { Exercise } from 'src/exercise';
 })
 export class ExerciseListComponent implements OnInit {
 
-  exerciseService: ExerciseService;
+  myES: ExerciseService;
+  myExercise: Exercise;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,11 +27,9 @@ export class ExerciseListComponent implements OnInit {
   })
 
   AddExercise() {
-    console.log("TEST addExerciseFormGroup=" + this.addExerciseFormGroup);
-    console.log("TEST addExerciseFormGroup.name=" + this.addExerciseFormGroup.controls.name.value);
     let newExercise: Exercise = this.addExerciseFormGroup.value;
-    alert("TEST:Jake - "+newExercise.name + newExercise.description + newExercise.muscleGroups);
-    
+    this.myES.createExercise(newExercise.name, newExercise.description, [MuscleGroups.legs]);
+    alert("Test point reached");
   }
 
 }
