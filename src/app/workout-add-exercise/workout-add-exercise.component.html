@@ -3,7 +3,7 @@
             <h2 class="display-5">Exercise:
                 <span class="dropdown">
                     <select formControlName="exerciseControl" class="btn btn-outline-primary">
-                        <option class="dropdown-item" *ngFor="let exercise of exerciseList" [ngValue]="exercise">{{exercise.name}}</option>
+                        <option class="dropdown-item" *ngFor="let exercise of exerciseList" [value]="exercise.id">{{exercise.name}}</option>
                     </select>
                 </span>
             </h2>
