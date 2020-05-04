@@ -19,6 +19,8 @@ div{
 
 .grouping-container {
     background-color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
     padding: 10px 10px 10px 10px;
     width: 95%;
 }
@@ -26,22 +28,21 @@ div{
 .exercise-listing {
     background-color: lightgray;
     margin: 10px 5px 10px 5px;
-    padding-bottom: 10px;
     width: 95%;
     height: 75px;
 }
 
 p {
-    margin: 15px 5px 5px 10px;
+    margin: 10px 5px 5px 10px;
 }
 
 .add-exercise-field {
     vertical-align: top;
     background-color: lightgray;
-    padding: 25px 10px 0px 10px;
+    padding: 5px 10px 0px 10px;
     margin: 5px 5px 5px 5px;
     width: 90%;
-    height: 50px;
+    height: 75px;
 }
 
 .add-exercise-input {
