@@ -3,7 +3,7 @@ import { ExerciseService } from 'src/app/exercise.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Exercise } from 'src/exercise';
 import { MuscleGroup } from 'src/muscle-group';
-import {MuscleGroups} from 'src/app/muscle-groups';
+import { MuscleGroups } from 'src/app/muscle-groups';
 
 
 @Component({
@@ -13,9 +13,10 @@ import {MuscleGroups} from 'src/app/muscle-groups';
 })
 export class ExerciseListComponent implements OnInit {
 
-  myES: ExerciseService;
   myExercise: Exercise;
-  constructor() { }
+  muscleGroupList: MuscleGroup[] = [MuscleGroups.abdomen, MuscleGroups.arms, MuscleGroups.back,
+                                        MuscleGroups.chest, MuscleGroups.legs, MuscleGroups.shoulders];
+  constructor(private myES: ExerciseService) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +29,7 @@ export class ExerciseListComponent implements OnInit {
 
   AddExercise() {
     let newExercise: Exercise = this.addExerciseFormGroup.value;
-    this.myES.createExercise(newExercise.name, newExercise.description, [MuscleGroups.legs]);
-    alert("Test point reached");
+    this.myES.createExercise(newExercise.name, newExercise.description, newExercise.muscleGroups);
   }
 
 }
