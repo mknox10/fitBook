@@ -36,9 +36,12 @@
                     Description: <input type="text" formControlName="description" class="add-exercise-input" id="description-input"/>
                 </div>
                 <div class="add-exercise-field">
-                    Muscle Group: <input type="text" formControlName="muscleGroups" class="add-exercise-input" id="muscle-group-input"/>
+                    Muscle Group: 
+                    <select formControlName="muscleGroups" >
+                        <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle.name">{{muscle.name}}</option>
+                    </select>
                 </div>
-                <button type="submit" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Submit</b></button>     
+                <button type="submit"class="btn btn-outline-primary" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Add Exercise</b></button>     
             </div>
         </form>
     </div>   
