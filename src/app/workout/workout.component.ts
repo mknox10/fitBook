@@ -137,12 +137,8 @@ export class WorkoutComponent implements OnInit {
     return record;
   }
 
-  cloneWorkout(workout: Workout): Workout {
+  cloneWorkout(): void {
     this.previous_workout = !this.previous_workout;
-    let records: Record[] = workout.records;
-    records.forEach(set => {
-      set.actualSets = [];
-    })
-    return this.ws.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
+    this.workout = this.ws.cloneWorkout(this.workout);
   }
 }

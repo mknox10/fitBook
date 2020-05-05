@@ -108,4 +108,12 @@ export class WorkoutService {
   saveWorkout(workout: Workout) {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
   }
+
+  cloneWorkout(workout: Workout) {
+    let records: Record[] = workout.records;
+    records.forEach(set => {
+      set.actualSets = [];
+    })
+    return this.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
+  }
 }
