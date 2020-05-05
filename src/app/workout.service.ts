@@ -2,15 +2,14 @@ import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
 import {Record} from '../record';
 import {ExerciseService} from './exercise.service';
-import { WORKOUTS } from './dbworkout-list';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
 
-  workouts: Workout[] = WORKOUTS;
-  //id: number = 0;
+  workouts: Workout[] = [];
+  id: number = 0;
 
   constructor(private exerciseService: ExerciseService) {
     this.createWorkout(
@@ -85,8 +84,7 @@ export class WorkoutService {
 
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
-      //id: this.id++,
-      id: WORKOUTS[WORKOUTS.length-1].id++,
+      id: this.id++,
       name,
       date,
       records,
