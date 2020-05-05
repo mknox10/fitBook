@@ -14,16 +14,19 @@ export class WorkoutExerciseComponent implements OnInit {
 
   @Input() record: Record;
   @Output() remove_exercise = new EventEmitter<Record>();
+  @Output() save_exercise = new EventEmitter<Record>();
 
   addExerciseSubscription: Subscription;
   show_edit: boolean = false;
   show_remove: boolean = false;
   use_weight: boolean = false; //marks if any weight is used for the set
+  targetNumSets: number;
+  actualNumSets: number;
 
-  es: ExerciseService = new ExerciseService();
-  ws: WorkoutService = new WorkoutService(this.es);
-
-  constructor() { }
+  constructor(private es: ExerciseService, private ws: WorkoutService) {
+    es = new ExerciseService();
+    ws = new WorkoutService(es);
+  }
 
   ngOnInit(): void {
     if (this.record.exercise.id === undefined) {
@@ -39,9 +42,12 @@ export class WorkoutExerciseComponent implements OnInit {
   saveRecord(record : Record): void {
     this.show_edit = !this.show_edit;
     this.checkWeight();
+    this.save_exercise.emit(this.record);
   }
 
   checkWeight(): void {
+    this.targetNumSets = this.record.targetSets.length;
+    this.actualNumSets = this.record.actualSets.length;
     this.record.targetSets.forEach(set => {
       if (!(set.weight === null || set.weight === 0)) {
         this.use_weight = true;

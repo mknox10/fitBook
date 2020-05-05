@@ -30,10 +30,10 @@ export class WorkoutComponent implements OnInit {
   date: String;
   newName: string;
 
-  es: ExerciseService;
-  ws: WorkoutService;
-
-  constructor() { }
+  constructor(private es: ExerciseService, private ws: WorkoutService) {
+    es = new ExerciseService();
+    ws = new WorkoutService(es);
+  }
 
   ngOnInit(): void {
     this.in_progress = false;
@@ -65,11 +65,6 @@ export class WorkoutComponent implements OnInit {
     this.newName = "";
   }
 
-  cloneWorkout(): void {
-    this.previous_workout = !this.previous_workout;
-    this.workout = this.ws.cloneWorkout(this.workout);
-  }
-
   beginWorkout(): void {
     this.in_progress = true;
     console.log("Beginning Workout");
@@ -78,23 +73,38 @@ export class WorkoutComponent implements OnInit {
   finishWorkout(): void {
     this.in_progress = false;
     this.previousWorkoutCheck();
+    this.SummaryStatistics();
     console.log("Finishing Workout");
   }
 
   addExercise(): void {
-    this.ws.addRecord(this.workout);
-    this.SummaryStatistics();
+    this.addRecord(this.workout);
   }
 
   removeRecord(record : Record): void {
-    this.ws.removeRecord(this.workout, record);
+    const index: number = this.workout.records.indexOf(record);
+    if (index !== -1) {
+      this.workout.records.splice(index,1);
+    }
     this.targetTotalSets -= record.targetSets.length;
+    this.SummaryStatistics();
+    this.ws.saveWorkout(this.workout);
+    console.log("Exercise Removed Successfully");
+  }
+
+  saveRecord(): void {
+    this.ws.saveWorkout(this.workout);
     this.SummaryStatistics();
   }
 
   /** Calculate Workout Summary Statistics **/
-  SummaryStatistics() {
-    //TODO: math isn't right after edits
+  SummaryStatistics(): void {
+    this.targetTotalExercises = 0;
+    this.targetTotalReps = 0;
+    this.targetTotalSets = 0;
+    this.actualTotalExercises = 0;
+    this.actualTotalReps = 0;
+    this.actualTotalSets = 0;
     this.workout.records.forEach((record) => {
       this.targetTotalExercises++;
       this.actualTotalExercises += record.actualSets.length !== 0 ? 1 : 0;
@@ -107,5 +117,32 @@ export class WorkoutComponent implements OnInit {
         this.actualTotalReps += set.reps;
       });
     });
+  }
+
+  addRecord(workout: Workout): Record {
+    let record: Record = new Record();
+    let exercise: Exercise = new Exercise();
+    exercise.name = "";
+    record.exercise = exercise;
+    record.targetSets = [{reps: 0,
+                      weight: 0},
+                      {reps: 0,
+                      weight: 0},
+                      {reps: 0,
+                      weight: 0}];
+    record.actualSets = [];
+    workout.records.push(record);
+    this.ws.saveWorkout(this.workout);
+    console.log("Exercise Added Successfully");
+    return record;
+  }
+
+  cloneWorkout(workout: Workout): Workout {
+    this.previous_workout = !this.previous_workout;
+    let records: Record[] = workout.records;
+    records.forEach(set => {
+      set.actualSets = [];
+    })
+    return this.ws.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
   }
 }

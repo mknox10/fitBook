@@ -5,7 +5,7 @@
     </div>
     <div *ngFor="let record of workout.records">
         <div *ngIf="in_progress === false">
-            <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)"></app-workout-exercise>
+            <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)" (save_exercise)="saveRecord($event)"></app-workout-exercise>
         </div>
         <div *ngIf="in_progress === true">
             <app-workout-in-progress [record]="record"></app-workout-in-progress>
@@ -39,7 +39,4 @@
         <h5>Total Sets: {{actualTotalSets}}</h5>
         <h5>Total Reps: {{actualTotalReps}}</h5>
     </div>
-    <!-- TODO: Workout Notes -->
-    <!-- <h5>Workout Notes:</h5>
-    <p></p> -->
 </div>

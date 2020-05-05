@@ -85,17 +85,9 @@ export class WorkoutService {
 
   loadWorkout(): Workout {
     if (this.workouts.length === 0) {
-      //TODO: return new workout
+      return this.createWorkout("New Workout", new Date(), []);
     }
     return this.workouts[0];
-  }
-
-  cloneWorkout(workout: Workout): Workout {
-    let records: Record[] = workout.records;
-    records.forEach(set => {
-      set.actualSets = [];
-    })
-    return this.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
   }
 
   createWorkout(name: string, date: Date, records: Record[]): Workout {
@@ -115,37 +107,5 @@ export class WorkoutService {
 
   saveWorkout(workout: Workout) {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
-  }
-
-
-  /** These should probobly be their own record service **/
-  removeRecord(workout: Workout, record: Record): void {
-    const index: number = workout.records.indexOf(record);
-    if (index !== -1) {
-      workout.records.splice(index,1);
-    }
-    console.log("Exercise Removed Successfully");
-  }
-
-  addRecord(workout: Workout): Record {
-    //TODO: clean this up, this shit is a mess.
-    let record: Record = new Record();
-    let exercise: Exercise = new Exercise();
-    exercise.name = "";
-    record.exercise = exercise;
-    record.targetSets = [{reps: 0,
-                      weight: 0},
-                      {reps: 0,
-                      weight: 0},
-                      {reps: 0,
-                      weight: 0}];
-    record.actualSets = [];
-
-    workout.records.push(record);
-
-    console.log(exercise.id);
-
-    console.log("Exercise Added Successfully");
-    return record;
   }
 }

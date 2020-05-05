@@ -11,18 +11,13 @@
         <table class="input-table">
             <thead class="table-input-head">
                 <tr>
-                    <th class="input-header">   </th>
-                    <th class="input-header" *ngIf="numSets > 0" scope="col">Set 1</th>
-                    <th class="input-header" *ngIf="numSets > 1" scope="col">Set 2</th>
-                    <th class="input-header" *ngIf="numSets > 2" scope="col">Set 3</th>
-                    <th class="input-header" *ngIf="numSets > 3" scope="col">Set 4</th>
-                    <th class="input-header" *ngIf="numSets > 4" scope="col">Set 5</th>
-                    <th class="input-header" *ngIf="numSets > 5" scope="col">Set 6</th>
-                    <th class="input-header" *ngIf="numSets > 6" scope="col">Set 7</th>
-                    <th class="input-header" *ngIf="numSets > 7" scope="col">Set 8</th>
-                    <th class="input-header" *ngIf="numSets > 8" scope="col">Set 9</th>
-                    <th class="input-header" *ngIf="numSets > 9" scope="col">Set 10</th>
-                    <th>   </th>
+                    <thead class="table-input-head">
+                        <tr>
+                             <th class="input-header">   </th>
+                             <th class="input-header" *ngFor="let x of [].constructor(this.numSets); let i = index" scope="col">Set {{i + 1}}</th>
+                             <th>   </th>
+                         </tr>
+                     </thead>
                 </tr>
             </thead>
             <tbody>

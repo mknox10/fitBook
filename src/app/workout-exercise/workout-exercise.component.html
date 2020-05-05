@@ -8,16 +8,8 @@
                 <thead>
                     <tr>
                         <th>   </th>
-                        <th *ngIf="record.targetSets.length > 0" scope="col">Set 1</th>
-                        <th *ngIf="record.targetSets.length > 1" scope="col">Set 2</th>
-                        <th *ngIf="record.targetSets.length > 2" scope="col">Set 3</th>
-                        <th *ngIf="record.targetSets.length > 3" scope="col">Set 4</th>
-                        <th *ngIf="record.targetSets.length > 4" scope="col">Set 5</th>
-                        <th *ngIf="record.targetSets.length > 5" scope="col">Set 6</th>
-                        <th *ngIf="record.targetSets.length > 6" scope="col">Set 7</th>
-                        <th *ngIf="record.targetSets.length > 7" scope="col">Set 8</th>
-                        <th *ngIf="record.targetSets.length > 8" scope="col">Set 9</th>
-                        <th *ngIf="record.targetSets.length > 9" scope="col">Set 10</th>
+                        <th class="input-header" *ngFor="let x of [].constructor(this.targetNumSets); let i = index" scope="col">Set {{i + 1}}</th>
+                        <th>   </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,16 +28,8 @@
                 <thead>
                     <tr>
                         <th>   </th>
-                        <th *ngIf="record.targetSets.length > 0" scope="col">Set 1</th>
-                        <th *ngIf="record.targetSets.length > 1" scope="col">Set 2</th>
-                        <th *ngIf="record.targetSets.length > 2" scope="col">Set 3</th>
-                        <th *ngIf="record.targetSets.length > 3" scope="col">Set 4</th>
-                        <th *ngIf="record.targetSets.length > 4" scope="col">Set 5</th>
-                        <th *ngIf="record.targetSets.length > 5" scope="col">Set 6</th>
-                        <th *ngIf="record.targetSets.length > 6" scope="col">Set 7</th>
-                        <th *ngIf="record.targetSets.length > 7" scope="col">Set 8</th>
-                        <th *ngIf="record.targetSets.length > 8" scope="col">Set 9</th>
-                        <th *ngIf="record.targetSets.length > 9" scope="col">Set 10</th>
+                        <th class="input-header" *ngFor="let x of [].constructor(this.actualNumSets); let i = index" scope="col">Set {{i + 1}}</th>
+                        <th>   </th>
                     </tr>
                 </thead>
                 <tbody>
