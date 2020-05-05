@@ -63,4 +63,10 @@ export class CalendarComponent implements OnInit {
     this.addPastWorkoutForm.reset();
   }
 
+  index: number;
+  deleteWorkout(workout: any) {
+    this.index = this.calendarWorkouts.indexOf(workout);
+    this.calendarWorkouts.splice(this.index, 1);
+  }
+
 }

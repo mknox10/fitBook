@@ -31,3 +31,16 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div *ngFor='let workout of calendarWorkouts'>
+        <div class="container alert alert-primary">
+            <h5>{{workout.title}} on {{workout.date}}</h5>
+            <div>
+                <button class="btn btn-primary" (click)="deleteWorkout(workout)">Delete</button>
+                <button class="btn btn-primary" routerLink="/workout">View</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
