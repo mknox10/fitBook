@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
-import {Record} from '../record';
+import {Record} from 'src/record';
 import {ExerciseService} from './exercise.service';
+import { Exercise } from 'src/exercise';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,13 @@ export class WorkoutService {
     return this.workouts.find(w => w.id === id);
   }
 
+  loadWorkout(): Workout {
+    if (this.workouts.length === 0) {
+      return this.createWorkout("New Workout", new Date(), []);
+    }
+    return this.workouts[0];
+  }
+
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
       id: this.id++,
@@ -99,5 +107,13 @@ export class WorkoutService {
 
   saveWorkout(workout: Workout) {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
+  }
+
+  cloneWorkout(workout: Workout) {
+    let records: Record[] = workout.records;
+    records.forEach(set => {
+      set.actualSets = [];
+    })
+    return this.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
   }
 }

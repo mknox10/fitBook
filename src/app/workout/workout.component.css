@@ -1,0 +1,7 @@
+#header_row {
+    text-align: center;
+}
+.header {
+    display: inline-block;
+    margin: 0 8rem 0 8rem;
+}

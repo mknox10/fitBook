@@ -1,0 +1,63 @@
+<div *ngIf="exercise_complete !== true" class="container">
+    <div class="center jumbotron">
+        <h2 class="display-5">{{record.exercise.name}}</h2>
+        <p>{{record.exercise.description}}</p>
+        <form [formGroup]="exerciseForm" (ngSubmit)="finishSet()">
+            <table class="input-table">
+                <thead class="table-input-head">
+                    <tr>
+                        <th class="input-header">   </th>
+                        <th class="input-header" *ngIf="numSets > 0" scope="col">Set 1</th>
+                        <th class="input-header" *ngIf="numSets > 1" scope="col">Set 2</th>
+                        <th class="input-header" *ngIf="numSets > 2" scope="col">Set 3</th>
+                        <th class="input-header" *ngIf="numSets > 3" scope="col">Set 4</th>
+                        <th class="input-header" *ngIf="numSets > 4" scope="col">Set 5</th>
+                        <th class="input-header" *ngIf="numSets > 5" scope="col">Set 6</th>
+                        <th class="input-header" *ngIf="numSets > 6" scope="col">Set 7</th>
+                        <th class="input-header" *ngIf="numSets > 7" scope="col">Set 8</th>
+                        <th class="input-header" *ngIf="numSets > 8" scope="col">Set 9</th>
+                        <th class="input-header" *ngIf="numSets > 9" scope="col">Set 10</th>
+                        <th>   </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div formGroupName="repsFormGroup">
+                        <tr>
+                            <th style="padding-left: 1rem" scope="col">Reps</th>
+                            <td class="table-input"><input *ngIf="numSets > 0" formControlName="reps1" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 1" formControlName="reps2" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 2" formControlName="reps3" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 3" formControlName="reps4" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 4" formControlName="reps5" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 5" formControlName="reps6" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 6" formControlName="reps8" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 7" formControlName="reps8" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 8" formControlName="reps9" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 9" formControlName="reps10" type="number" min=1 class="form-control"/></td>
+                        </tr>
+                    </div>
+                    <div formGroupName="weightFormGroup">
+                        <tr>
+                            <th scope="col">Weight</th>
+                            <td class="table-input"><input *ngIf="numSets > 0" formControlName="weight1" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 1" formControlName="weight2" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 2" formControlName="weight3" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 3" formControlName="weight4" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 4" formControlName="weight5" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 5" formControlName="weight6" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 6" formControlName="weight7" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 7" formControlName="weight8" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 8" formControlName="weight9" type="number" min=1 class="form-control"/></td>
+                            <td class="table-input"><input *ngIf="numSets > 9" formControlName="weight10" type="number" min=1 class="form-control"/></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+            <div id="buttons">
+                <button *ngIf="numSets < 10" type="button" class="btn btn-outline-primary" (click)="addSet()">Add Set</button>
+                <button *ngIf="numSets > 0" type="button" class="btn btn-outline-danger" (click)="removeSet()">Remove Set</button>
+                <button *ngIf="numSets > 0" type="submit" class="btn btn-outline-primary">Complete Exercise</button>
+            </div>
+        </form>
+    </div>
+</div>

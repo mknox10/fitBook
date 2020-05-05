@@ -1,0 +1,62 @@
+<div class="container">
+    <form [formGroup]="exerciseForm" (ngSubmit)="save()">
+            <h2 class="display-5">Exercise:
+                <span class="dropdown">
+                    <select formControlName="exerciseControl" class="btn btn-outline-primary">
+                        <option class="dropdown-item" *ngFor="let exercise of exerciseList" [value]="exercise.id">{{exercise.name}}</option>
+                    </select>
+                </span>
+            </h2>
+            <p>{{record.exercise.description}}</p>
+        <table class="input-table">
+            <thead class="table-input-head">
+                <tr>
+                    <thead class="table-input-head">
+                        <tr>
+                             <th class="input-header">   </th>
+                             <th class="input-header" *ngFor="let x of [].constructor(this.numSets); let i = index" scope="col">Set {{i + 1}}</th>
+                             <th>   </th>
+                         </tr>
+                     </thead>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <div formGroupName="repsFormGroup">
+                        <th style="padding-left: 1rem" scope="col">Reps</th>
+                        <td class="table-input"><input *ngIf="numSets > 0" formControlName="reps1" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 1" formControlName="reps2" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 2" formControlName="reps3" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 3" formControlName="reps4" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 4" formControlName="reps5" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 5" formControlName="reps6" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 6" formControlName="reps7" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 7" formControlName="reps8" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 8" formControlName="reps9" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 9" formControlName="reps10" type="number" min=1 class="form-control"/></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div formGroupName="weightFormGroup">
+                        <th scope="col">Weight</th>
+                        <td class="table-input"><input *ngIf="numSets > 0" formControlName="weight1" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 1" formControlName="weight2" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 2" formControlName="weight3" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 3" formControlName="weight4" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 4" formControlName="weight5" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 5" formControlName="weight6" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 6" formControlName="weight7" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 7" formControlName="weight8" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 8" formControlName="weight9" type="number" min=1 class="form-control"/></td>
+                        <td class="table-input"><input *ngIf="numSets > 9" formControlName="weight10" type="number" min=1 class="form-control"/></td>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <div id="buttons">
+            <button *ngIf="numSets < 10" type="button" class="btn btn-outline-primary" (click)="addSet()">Add Set</button>
+            <button *ngIf="numSets > 0" type="button" class="btn btn-outline-danger" (click)="removeSet()">Remove Set</button>
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+        </div>
+    </form>
+</div>
