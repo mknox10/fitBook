@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ExerciseListComponent } from './exercise-list/exercise-list.component';
 import { WorkoutComponent } from './workout/workout.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,9 @@ import { WorkoutComponent } from './workout/workout.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FullCalendarModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
