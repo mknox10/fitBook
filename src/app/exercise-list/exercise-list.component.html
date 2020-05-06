@@ -10,18 +10,7 @@
     <div id="exercise-listing-container">
         <h2><b><u>Exercises:</u></b></h2>
         <div class="grouping-container" >
-            <div class="exercise-listing">
-                <p>*Name*: *Muscle Group*</p>
-                <p>&emsp;*Description*</p>
-            </div>
-            <div class="exercise-listing">
-                <p>*Name*: *Muscle Group*</p>
-                <p>&emsp;*Description*</p>
-            </div>
-            <div class="exercise-listing">
-                <p>*Name*: *Muscle Group*</p>
-                <p>&emsp;*Description*</p>
-            </div>
+            <app-exercise-listing *ngFor = 'let exercise of exercisesList' [myExercise]="exercise"></app-exercise-listing>
         </div>
     </div>
     
@@ -37,8 +26,8 @@
                 </div>
                 <div class="add-exercise-field">
                     Muscle Group: 
-                    <select formControlName="muscleGroups" >
-                        <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle.name">{{muscle.name}}</option>
+                    <select multiple size="3" formControlName="muscleGroups" >
+                        <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle">{{muscle.name}}</option>
                     </select>
                 </div>
                 <button type="submit"class="btn btn-outline-primary" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Add Exercise</b></button>     
