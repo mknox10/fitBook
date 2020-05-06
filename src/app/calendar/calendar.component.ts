@@ -95,7 +95,7 @@ export class CalendarComponent implements OnInit {
   correctPastWorkoutDate: string;
   addPastWorkout() {
     this.correctPastWorkoutDate = this.getNewDay(this.addPastWorkoutForm.get('date').value);
-    this.workoutService.createWorkout(this.addPastWorkoutForm.get('title').value, this.addPastWorkoutForm.get('date').value, this.addPastWorkoutForm.get('workout').value.records);
+    this.workoutService.createWorkout(this.addPastWorkoutForm.get('title').value, new Date(this.correctPastWorkoutDate), this.addPastWorkoutForm.get('workout').value.records);
     this.addWorkoutsToCalendar(this.addPastWorkoutForm.get('title').value, new Date(this.correctPastWorkoutDate));
     this.addPastWorkoutForm.reset();
   }
