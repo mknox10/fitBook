@@ -62,8 +62,8 @@ export class CalendarComponent implements OnInit {
   addWorkout(event: Event) {
     event.preventDefault();
     this.records = [];
-    this.workoutService.createWorkout(this.addWorkoutForm.get('title').value, this.addWorkoutForm.get('date').value, this.records)
     this.correctWorkoutDate = this.getNewDay(this.addWorkoutForm.get('date').value);
+    this.workoutService.createWorkout(this.addWorkoutForm.get('title').value, new Date(this.correctWorkoutDate), this.records)
     this.addWorkoutsToCalendar(this.addWorkoutForm.get('title').value, new Date(this.correctWorkoutDate));
     this.addWorkoutForm.reset();
   }
@@ -107,5 +107,5 @@ export class CalendarComponent implements OnInit {
     this.calendarWorkouts.splice(this.index, 1);
   }
 
-  
+
 }
