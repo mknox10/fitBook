@@ -17,7 +17,7 @@
                     Description: <input type="text" formControlName="description" class="add-exercise-input" id="description-input"/>
                 </div>
                 <div class="add-exercise-field">
-                    Muscle Group: 
+                    Muscle Group: (use "CTRL + LeftClick" to choose multiple)
                     <select multiple size="3" formControlName="muscleGroups" >
                         <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle">{{muscle.name}}</option>
                     </select>
