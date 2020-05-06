@@ -18,6 +18,8 @@ export class ExerciseListComponent implements OnInit {
                                         MuscleGroups.chest, MuscleGroups.legs, MuscleGroups.shoulders];
   constructor(private myES: ExerciseService) { }
 
+  exercisesList: Exercise[] = this.myES.getExercises();
+
   ngOnInit(): void {
   }
 
