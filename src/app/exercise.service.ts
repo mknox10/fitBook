@@ -1,33 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Exercise} from '../exercise';
 import {MuscleGroup} from '../muscle-group';
-import {MuscleGroups} from './muscle-groups';
+import {EXERCISES} from './dbexercise-list';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
 
-  exercises: Exercise[] = [];
+  exercises: Exercise[] = EXERCISES;
   id: number = 0;
-
-  constructor() {
-    this.createExercise(
-      'Bench Press',
-      'The person performing the exercise lies on their back on a bench with a barbell grasped in both hands. They lower the barbell to chest level, then press the barbell upwards, extending the arms until the elbows are locked out.',
-      [MuscleGroups.chest, MuscleGroups.shoulders]
-    );
-    this.createExercise(
-      'Sit-Up',
-      'Lie on your back on the floor or a bench. Put your hands on the sides of or behind your neck. Bend your hips and waist to raise your body off the ground or bench. Lower your body back to the starting position.',
-      [MuscleGroups.abdomen]
-    );
-    this.createExercise(
-      'Leg Press',
-      'The individual pushes a weight or resistance away from them using their legs.',
-      [MuscleGroups.legs]
-    );
-  }
 
   getExercises(): Exercise[] {
     return this.exercises;
