@@ -1,1 +1,42 @@
-<p>workout works!</p>
+<div class="container">
+    <div id="header_row">
+        <h1>{{workout.name}}</h1>
+        <h3>{{date}}</h3>
+    </div>
+    <div *ngFor="let record of workout.records">
+        <div *ngIf="in_progress === false">
+            <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)" (save_exercise)="saveRecord()"></app-workout-exercise>
+        </div>
+        <div *ngIf="in_progress === true">
+            <app-workout-in-progress [record]="record"></app-workout-in-progress>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div id="buttons">
+        <button type="button" class="btn btn-outline-primary" (click)="change_name = true" *ngIf="in_progress !== true">Change Workout Name</button>
+        <button type="button" class="btn btn-outline-primary" (click)="addExercise()" *ngIf="in_progress === false && previous_workout === false">Add Exercise</button>
+        <button type="button" class="btn btn-outline-primary" (click)="beginWorkout()" *ngIf="in_progress === false && previous_workout === false">Begin Workout</button>
+        <button type="button" class="btn btn-outline-primary" (click)="cloneWorkout()" *ngIf="previous_workout === true">Clone Workout</button>
+        <button type="button" class="btn btn-outline-primary" (click)="finishWorkout()" *ngIf="in_progress === true">Complete Workout</button>
+        <button type="button" class="btn btn-outline-danger" (click)="in_progress = !in_progress" *ngIf="in_progress === true">Cancel Workout</button>
+    </div>
+    <div id="buttons" *ngIf="change_name && in_progress === false">
+        <input style="width: 20% !important; display: inline-block;" placeholder="New Workout Name" [(ngModel)]="newName" type="string" class="form-control"/>
+        <button type="button" class="btn btn-outline-primary" (click)="changeName()">Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="change_name = false">Cancel</button>
+    </div>
+    <hr class="my-4">
+    <h3 class= "center">Workout Summary</h3>
+    <div id="left">
+        <h4>Target</h4>
+        <h5>Total Exercies: {{targetTotalExercises}}</h5>
+        <h5>Total Sets: {{targetTotalSets}}</h5>
+        <h5>Total Reps: {{targetTotalReps}}</h5>
+    </div>
+    <div id="right">
+        <h4>Actual</h4>
+        <h5>Total Exercies: {{actualTotalExercises}}</h5>
+        <h5>Total Sets: {{actualTotalSets}}</h5>
+        <h5>Total Reps: {{actualTotalReps}}</h5>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import { ExerciseService } from 'src/app/exercise.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -6,12 +7,14 @@ import { MuscleGroup } from 'src/muscle-group';
 import { MuscleGroups } from 'src/app/muscle-groups';
 
 
+
 @Component({
   selector: 'app-exercise-list',
   templateUrl: './exercise-list.component.html',
   styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
+
 
   myExercise: Exercise;
   muscleGroupList: MuscleGroup[] = [MuscleGroups.abdomen, MuscleGroups.arms, MuscleGroups.back,
@@ -35,3 +38,4 @@ export class ExerciseListComponent implements OnInit {
   }
 
 }
+
