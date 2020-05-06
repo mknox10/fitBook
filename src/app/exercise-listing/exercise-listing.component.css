@@ -1,0 +1,27 @@
+.exercise-listing {
+    background-color: lightgray;
+    margin: 10px 5px 10px 5px;
+    width: 95%;
+}
+
+p {
+    margin: 10px 5px 5px 10px;
+}
+
+.muscle-group-list {
+    display: inline;
+    list-style: none;
+    padding: 0px;
+}
+
+.muscle-group-list li {
+    display: inline;
+}
+
+.muscle-group-list li::after {
+    content: ", ";
+}
+
+.muscle-group-list li:last-child::after {
+    content: "";
+}

@@ -1,1 +1,29 @@
-<p>exercise-list works!</p>
+<body>
+    <div id="exercise-listing-container">
+        <h2><b><u>Exercises:</u></b></h2>
+        <div class="grouping-container" >
+            <app-exercise-listing *ngFor = 'let exercise of exercisesList' [myExercise]="exercise"></app-exercise-listing>
+        </div>
+    </div>
+    
+    <div id="add-exercise-container">
+        <form [formGroup] = "addExerciseFormGroup" style="display: inline-block;">
+            <h2><b><u>Add Exercise:</u></b></h2>
+            <div class="grouping-container" >
+                <div class="add-exercise-field">
+                    Exercise Name: <input type="text" formControlName="name" class="add-exercise-input" id="name-input" />
+                </div>
+                <div class="add-exercise-field">
+                    Description: <input type="text" formControlName="description" class="add-exercise-input" id="description-input"/>
+                </div>
+                <div class="add-exercise-field">
+                    Muscle Group: (use "CTRL + LeftClick" to choose multiple)
+                    <select multiple size="3" formControlName="muscleGroups" >
+                        <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle">{{muscle.name}}</option>
+                    </select>
+                </div>
+                <button type="submit"class="btn btn-outline-primary" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Add Exercise</b></button>     
+            </div>
+        </form>
+    </div>   
+</body>

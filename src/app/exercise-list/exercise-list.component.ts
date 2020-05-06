@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, Input } from '@angular/core';
+import { ExerciseService } from 'src/app/exercise.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Exercise } from 'src/exercise';
+import { MuscleGroup } from 'src/muscle-group';
+import { MuscleGroups } from 'src/app/muscle-groups';
+
+
 
 @Component({
   selector: 'app-exercise-list',
@@ -7,8 +15,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseListComponent implements OnInit {
 
-  constructor() { }
+
+  myExercise: Exercise;
+  muscleGroupList: MuscleGroup[] = [MuscleGroups.abdomen, MuscleGroups.arms, MuscleGroups.back,
+                                        MuscleGroups.chest, MuscleGroups.legs, MuscleGroups.shoulders];
+  constructor(private myES: ExerciseService) { }
+
+  exercisesList: Exercise[] = this.myES.getExercises();
 
   ngOnInit(): void {
   }
+
+  addExerciseFormGroup = new FormGroup({
+    name: new FormControl (""),
+    description: new FormControl(""),
+    muscleGroups: new FormControl("")
+  })
+
+  AddExercise() {
+    let newExercise: Exercise = this.addExerciseFormGroup.value;
+    this.myES.createExercise(newExercise.name, newExercise.description, newExercise.muscleGroups);
+  }
+
 }
+

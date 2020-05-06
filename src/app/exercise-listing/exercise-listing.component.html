@@ -1,0 +1,8 @@
+<div class="exercise-listing">
+    <div>{{myExercise.name}}: 
+        <ul class="muscle-group-list">
+            <li *ngFor='let muscleGroup of myExercise.muscleGroups'>{{muscleGroup.name}}</li>
+        </ul>
+    </div>
+    <p>&emsp;{{myExercise.description}}</p>
+</div>
