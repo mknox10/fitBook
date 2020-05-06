@@ -11,5 +11,4 @@ export class ExerciseListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
