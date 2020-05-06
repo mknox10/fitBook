@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
 import {Record} from 'src/record';
 import {ExerciseService} from './exercise.service';
+import { WORKOUTS } from './dbworkout-list';
 import { Exercise } from 'src/exercise';
 
 @Injectable({
@@ -9,71 +10,10 @@ import { Exercise } from 'src/exercise';
 })
 export class WorkoutService {
 
-  workouts: Workout[] = [];
-  id: number = 0;
+  workouts: Workout[] = WORKOUTS;
+  //id: number = 0;
 
-  constructor(private exerciseService: ExerciseService) {
-    this.createWorkout(
-      'Monday Workout',
-      new Date(2020, 6, 1),
-      [
-        {
-          exercise: exerciseService.getExercise(0),
-          targetSets: [
-            {
-              reps: 10,
-              weight: 160,
-            },
-            {
-              reps: 10,
-              weight: 160,
-            },
-            {
-              reps: 10,
-              weight: 160,
-            },
-          ],
-          actualSets: []
-        },
-        {
-          exercise: exerciseService.getExercise(1),
-          targetSets: [
-            {
-              reps: 15,
-              weight: null,
-            },
-            {
-              reps: 15,
-              weight: null,
-            },
-            {
-              reps: 15,
-              weight: null,
-            },
-          ],
-          actualSets: []
-        },
-        {
-          exercise: exerciseService.getExercise(2),
-          targetSets: [
-            {
-              reps: 10,
-              weight: 200,
-            },
-            {
-              reps: 10,
-              weight: 200,
-            },
-            {
-              reps: 10,
-              weight: 200,
-            },
-          ],
-          actualSets: []
-        },
-      ]
-    );
-  }
+  constructor(private exerciseService: ExerciseService) { }
 
   getWorkouts(): Workout[] {
     return this.workouts;
@@ -92,7 +32,8 @@ export class WorkoutService {
 
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
-      id: this.id++,
+      //id: this.id++,
+      id: WORKOUTS[WORKOUTS.length-1].id++,
       name,
       date,
       records,

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,7 @@ import { WorkoutInProgressComponent } from './workout-in-progress/workout-in-pro
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FullCalendarModule,
     ReactiveFormsModule,
     FormsModule
   ],
