@@ -45,16 +45,14 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-    <div *ngFor='let workout of calendarWorkouts'>
+    <div *ngFor='let workout of workoutsList'>
         <div class="container alert alert-secondary">
-            <h5>{{workout.title}} on {{workout.date.toDateString()}}</h5>
+            <h5>{{workout.name}} on {{workout.date.toDateString()}}</h5>
             <div>
                 <button class="btn btn-primary mr-2" (click)="deleteWorkout(workout)">Remove Workout</button>
-                <button class="btn btn-primary" routerLink="/workout">View Workout</button>
+                <button class="btn btn-primary" routerLink="/workout/{{workout.id}}">View Workout</button>
             </div>
         </div>
-        
     </div>
 </div>

@@ -17,6 +17,9 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.getWorkouts();
     this.getCalendarWorkouts();
+    // this.calendarWorkouts.forEach(work => {
+    //   console.log(work.id);
+    // });
   }
 
   calendarPlugins = [dayGridPlugin];
