@@ -1,6 +1,5 @@
 body{
     background-color: lightgray;
-    font-family: sans-serif
 }
 
 div{
@@ -25,13 +24,6 @@ div{
     width: 95%;
 }
 
-.exercise-listing {
-    background-color: lightgray;
-    margin: 10px 5px 10px 5px;
-    width: 95%;
-    height: 75px;
-}
-
 p {
     margin: 10px 5px 5px 10px;
 }
@@ -39,15 +31,18 @@ p {
 .add-exercise-field {
     vertical-align: top;
     background-color: lightgray;
-    padding: 5px 10px 0px 10px;
+    padding: 5px 10px 5px 10px;
     margin: 5px 5px 5px 5px;
     width: 90%;
-    height: 75px;
 }
 
 .add-exercise-input {
     width: 95%;
     margin-top: 5px;
+}
+
+select {
+    width: 95%;
 }
 
 button{
