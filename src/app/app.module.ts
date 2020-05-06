@@ -11,17 +11,19 @@ import { WorkoutComponent } from './workout/workout.component';
 import { WorkoutExerciseComponent } from './workout-exercise/workout-exercise.component';
 import { WorkoutAddExerciseComponent } from './workout-add-exercise/workout-add-exercise.component';
 import { WorkoutInProgressComponent } from './workout-in-progress/workout-in-progress.component';
+import { ExerciseListingComponent } from './exercise-listing/exercise-listing.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CalendarComponent,
-    ExerciseListComponent,
-    WorkoutComponent,
-    WorkoutExerciseComponent,
-    WorkoutAddExerciseComponent,
-    WorkoutInProgressComponent
-  ],
+    declarations: [
+        AppComponent,
+        CalendarComponent,
+        ExerciseListComponent,
+        WorkoutComponent,
+        WorkoutExerciseComponent,
+        WorkoutAddExerciseComponent,
+        WorkoutInProgressComponent,
+        ExerciseListingComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
