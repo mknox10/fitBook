@@ -17,7 +17,7 @@
                             <input class="form-control" type="date" formControlName="date" placeholder="date (yyyy-mm-dd)">
                         </div>
                         <div>
-                            <button class="btn btn-primary" type="submit">Add Workout</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="!addWorkoutForm.valid">Add Workout</button>
                         </div>
                     </form>
                 </div>
@@ -38,7 +38,7 @@
                         <input class="form-control" type="date" formControlName="date" placeholder="date (yyyy-mm-dd)">
                     </div>
                     <div>
-                        <button class="btn btn-primary" type="submit">Clone Past Workout</button>
+                        <button class="btn btn-primary" type="submit" [disabled]="!addPastWorkoutForm.valid">Clone Past Workout</button>
                     </div>
                 </form>
             </div>
