@@ -1,7 +1,7 @@
 <div class="container">
     <div id="header_row">
         <h1>{{workout.name}}</h1>
-        <h3>{{date}}</h3>
+        <h3>{{date | date}}</h3>
     </div>
     <div *ngFor="let record of workout.records">
         <div *ngIf="in_progress === false">
