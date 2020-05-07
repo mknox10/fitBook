@@ -1,12 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
-import { Workout } from 'src/workout';
-import { Exercise } from 'src/exercise';
-import { Record } from 'src/record';
-import { ExerciseService } from '../exercise.service';
-import { WorkoutService } from '../workout.service';
+import {Workout} from 'src/workout';
+import {Exercise} from 'src/exercise';
+import {Record} from 'src/record';
+import {ExerciseService} from '../exercise.service';
+import {WorkoutService} from '../workout.service';
 
 @Component({
   selector: 'app-workout',
@@ -31,12 +30,19 @@ export class WorkoutComponent implements OnInit {
   date: String;
   newName: string;
 
-  constructor(private es: ExerciseService, private ws: WorkoutService, private route: ActivatedRoute) {
+  constructor(private es: ExerciseService, private ws: WorkoutService, private route: ActivatedRoute, private router: Router) {
     es = new ExerciseService();
     ws = new WorkoutService(es);
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+
     this.in_progress = false;
     this.es = new ExerciseService();
     this.ws = new WorkoutService(this.es);
@@ -47,12 +53,12 @@ export class WorkoutComponent implements OnInit {
       try {
         this.workout = this.ws.getWorkouts()[0];
       } catch (Exception) {
-        this.workout = this.ws.createWorkout("New Workout", new Date(), []);
+        this.workout = this.ws.createWorkout('New Workout', new Date(), []);
       }
     }
     this.date = this.workout.date.toLocaleString();
     this.change_name = false;
-    this.newName = "";
+    this.newName = '';
     this.previousWorkoutCheck();
     this.SummaryStatistics();
   }
@@ -69,34 +75,34 @@ export class WorkoutComponent implements OnInit {
   changeName(): void {
     this.change_name = false;
     this.workout.name = this.newName;
-    this.newName = "";
+    this.newName = '';
   }
 
   beginWorkout(): void {
     this.in_progress = true;
-    console.log("Beginning Workout");
+    console.log('Beginning Workout');
   }
 
   finishWorkout(): void {
     this.in_progress = false;
     this.previousWorkoutCheck();
     this.SummaryStatistics();
-    console.log("Finishing Workout");
+    console.log('Finishing Workout');
   }
 
   addExercise(): void {
     this.addRecord(this.workout);
   }
 
-  removeRecord(record : Record): void {
+  removeRecord(record: Record): void {
     const index: number = this.workout.records.indexOf(record);
     if (index !== -1) {
-      this.workout.records.splice(index,1);
+      this.workout.records.splice(index, 1);
     }
     this.targetTotalSets -= record.targetSets.length;
     this.SummaryStatistics();
     this.ws.saveWorkout(this.workout);
-    console.log("Exercise Removed Successfully");
+    console.log('Exercise Removed Successfully');
   }
 
   saveRecord(): void {
@@ -129,18 +135,24 @@ export class WorkoutComponent implements OnInit {
   addRecord(workout: Workout): Record {
     let record: Record = new Record();
     let exercise: Exercise = new Exercise();
-    exercise.name = "";
+    exercise.name = '';
     record.exercise = exercise;
-    record.targetSets = [{reps: 0,
-                      weight: 0},
-                      {reps: 0,
-                      weight: 0},
-                      {reps: 0,
-                      weight: 0}];
+    record.targetSets = [{
+      reps: 0,
+      weight: 0
+    },
+      {
+        reps: 0,
+        weight: 0
+      },
+      {
+        reps: 0,
+        weight: 0
+      }];
     record.actualSets = [];
     workout.records.push(record);
     this.ws.saveWorkout(this.workout);
-    console.log("Exercise Added Successfully");
+    console.log('Exercise Added Successfully');
     return record;
   }
 
