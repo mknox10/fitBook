@@ -9,7 +9,8 @@ import { WorkoutComponent } from './workout/workout.component';
 const routes: Routes = [
   { path: 'calendar', component: CalendarComponent },
   { path: 'exercise-list', component: ExerciseListComponent },
-  { path: 'workout/:id', component: WorkoutComponent }
+  { path: 'workout/:id', component: WorkoutComponent },
+  { path: '', redirectTo: '/calendar', pathMatch: 'full' }
 ];
 
 @NgModule({
