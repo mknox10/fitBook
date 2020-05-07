@@ -1,9 +1,9 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <img id="logo-img" class="navbar-brand" src="././assets/FitBookLogo.PNG"/>
-        <a class="navbar-brand" routerLink="/calendar">Calendar</a>
-        <a class="navbar-brand" routerLink="/exercise-list">Exercise List</a>
-        <a class="navbar-brand" routerLink="/workout/undefined">Workout</a>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a routerLink="/calendar"><img id="logo-img" class="navbar-brand" src="././assets/FitBookLogo.PNG"/></a>
+  <a class="navbar-brand" routerLink="/calendar">Calendar</a>
+  <a class="navbar-brand" routerLink="/exercise-list">Exercise List</a>
+  <a class="navbar-brand" routerLink="/workout/undefined">Workout</a>
+</nav>
+<div class="container py-4">
   <router-outlet></router-outlet>
 </div>

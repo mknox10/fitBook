@@ -8,11 +8,12 @@ import { WorkoutService } from '../workout.service';
 @Component({
   selector: 'app-workout-exercise',
   templateUrl: './workout-exercise.component.html',
-  styleUrls: ['./workout-exercise.component.css']
+  styleUrls: ['./workout-exercise.component.scss']
 })
 export class WorkoutExerciseComponent implements OnInit {
 
   @Input() record: Record;
+  @Input() workoutComplete: boolean;
   @Output() remove_exercise = new EventEmitter<Record>();
   @Output() save_exercise = new EventEmitter<Record>();
 
@@ -24,8 +25,6 @@ export class WorkoutExerciseComponent implements OnInit {
   actualNumSets: number;
 
   constructor(private es: ExerciseService, private ws: WorkoutService) {
-    es = new ExerciseService();
-    ws = new WorkoutService(es);
   }
 
   ngOnInit(): void {

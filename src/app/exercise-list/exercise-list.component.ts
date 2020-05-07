@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { ExerciseService } from 'src/app/exercise.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { Exercise } from 'src/exercise';
 import { MuscleGroup } from 'src/muscle-group';
 import { MuscleGroups } from 'src/app/muscle-groups';
@@ -11,7 +11,7 @@ import { MuscleGroups } from 'src/app/muscle-groups';
 @Component({
   selector: 'app-exercise-list',
   templateUrl: './exercise-list.component.html',
-  styleUrls: ['./exercise-list.component.css']
+  styleUrls: ['./exercise-list.component.scss']
 })
 export class ExerciseListComponent implements OnInit {
 
@@ -27,14 +27,15 @@ export class ExerciseListComponent implements OnInit {
   }
 
   addExerciseFormGroup = new FormGroup({
-    name: new FormControl (""),
-    description: new FormControl(""),
-    muscleGroups: new FormControl("")
+    name: new FormControl ("", [Validators.required]),
+    description: new FormControl("", [Validators.required]),
+    muscleGroups: new FormControl("", [Validators.required])
   })
 
   AddExercise() {
     let newExercise: Exercise = this.addExerciseFormGroup.value;
     this.myES.createExercise(newExercise.name, newExercise.description, newExercise.muscleGroups);
+    this.addExerciseFormGroup.reset();
   }
 
 }

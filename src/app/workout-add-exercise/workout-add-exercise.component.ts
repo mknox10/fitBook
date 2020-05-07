@@ -9,19 +9,18 @@ import { ExerciseService } from '../exercise.service';
 @Component({
   selector: 'app-workout-add-exercise',
   templateUrl: './workout-add-exercise.component.html',
-  styleUrls: ['./workout-add-exercise.component.css']
+  styleUrls: ['./workout-add-exercise.component.scss']
 })
 export class WorkoutAddExerciseComponent implements OnInit {
 
   @Input() record: Record;
   @Output() save_add_exercise = new EventEmitter<Record>();
 
-  es: ExerciseService = new ExerciseService();
   exerciseList: Exercise[];
   exerciseForm: FormGroup;
   numSets: number = 0; //specifies the number of sets, max is 10
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private es: ExerciseService) { }
 
   ngOnInit(): void {
     this.exerciseList = this.es.getExercises();
@@ -38,7 +37,7 @@ export class WorkoutAddExerciseComponent implements OnInit {
       );
     }
     this.exerciseForm = this.fb.group({
-      exerciseControl: new FormControl(this.record.exercise),
+      exerciseControl: new FormControl(this.record.exercise.id),
       repsFormGroup: new FormGroup(repsGroup),
       weightFormGroup: new FormGroup(weightsGroup),
     });
@@ -60,6 +59,7 @@ export class WorkoutAddExerciseComponent implements OnInit {
         targetSets.push(set);
       }
     }
+    this.record.exercise = this.exerciseList.find(e => e.id === +(this.exerciseForm.get('exerciseControl').value || 1));
     this.record.targetSets = targetSets;
     this.save_add_exercise.emit(this.record);
   }

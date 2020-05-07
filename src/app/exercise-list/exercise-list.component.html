@@ -5,7 +5,7 @@
             <app-exercise-listing *ngFor = 'let exercise of exercisesList' [myExercise]="exercise"></app-exercise-listing>
         </div>
     </div>
-    
+
     <div id="add-exercise-container">
         <form [formGroup] = "addExerciseFormGroup" style="display: inline-block;">
             <h2><b><u>Add Exercise:</u></b></h2>
@@ -22,8 +22,8 @@
                         <option class="dropdown-item" *ngFor="let muscle of muscleGroupList" [value]="muscle">{{muscle.name}}</option>
                     </select>
                 </div>
-                <button type="submit"class="btn btn-outline-primary" name="submit-button" id="submit-button" (click)="AddExercise()"><b>Add Exercise</b></button>     
+                <button type="submit"class="btn btn-outline-primary" name="submit-button" id="submit-button" (click)="AddExercise()" [disabled]="!addExerciseFormGroup.valid"><b>Add Exercise</b></button>
             </div>
         </form>
-    </div>   
+    </div>
 </body>

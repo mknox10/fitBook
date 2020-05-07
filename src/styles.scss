@@ -1,0 +1,9 @@
+$primary: #3a5798 !default;
+
+@import "~bootstrap/scss/bootstrap";
+
+.fc-event {
+  background-color: #3a5798;
+  border-color: #3a5798;
+  color: white !important;
+}
