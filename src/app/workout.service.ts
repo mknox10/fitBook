@@ -50,7 +50,7 @@ export class WorkoutService {
     this.workouts = this.workouts.map(w => w.id === workout.id ? workout : w);
   }
 
-  cloneWorkout(workout: Workout) {
+  cloneWorkout(workout: Workout): Workout {
     let records: Record[] = JSON.parse(JSON.stringify(workout.records));
     records.forEach(set => {
       set.actualSets = [];
