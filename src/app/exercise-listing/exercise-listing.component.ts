@@ -6,7 +6,7 @@ import { MuscleGroup } from 'src/muscle-group';
 @Component({
   selector: 'app-exercise-listing',
   templateUrl: './exercise-listing.component.html',
-  styleUrls: ['./exercise-listing.component.css']
+  styleUrls: ['./exercise-listing.component.scss']
 })
 export class ExerciseListingComponent implements OnInit {
 

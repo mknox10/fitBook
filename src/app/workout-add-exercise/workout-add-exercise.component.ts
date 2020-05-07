@@ -9,7 +9,7 @@ import { ExerciseService } from '../exercise.service';
 @Component({
   selector: 'app-workout-add-exercise',
   templateUrl: './workout-add-exercise.component.html',
-  styleUrls: ['./workout-add-exercise.component.css']
+  styleUrls: ['./workout-add-exercise.component.scss']
 })
 export class WorkoutAddExerciseComponent implements OnInit {
 

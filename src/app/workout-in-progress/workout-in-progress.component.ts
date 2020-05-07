@@ -7,7 +7,7 @@ import { Set } from 'src/set';
 @Component({
   selector: 'app-workout-in-progress',
   templateUrl: './workout-in-progress.component.html',
-  styleUrls: ['./workout-in-progress.component.css']
+  styleUrls: ['./workout-in-progress.component.scss']
 })
 export class WorkoutInProgressComponent implements OnInit {
 
