@@ -22,7 +22,7 @@
     </div>
     <div id="buttons" *ngIf="change_name && in_progress === false">
         <input style="width: 20% !important; display: inline-block;" placeholder="New Workout Name" [(ngModel)]="newName" type="string" class="form-control"/>
-        <button type="button" class="btn btn-outline-primary" (click)="changeName()">Save</button>
+        <button type="button" class="btn btn-outline-primary" (click)="changeName()" [disabled]="!newName">Save</button>
         <button type="button" class="btn btn-outline-danger" (click)="change_name = false">Cancel</button>
     </div>
     <hr class="my-4">
