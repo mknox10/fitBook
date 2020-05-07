@@ -51,10 +51,10 @@ export class WorkoutService {
   }
 
   cloneWorkout(workout: Workout) {
-    let records: Record[] = workout.records;
+    let records: Record[] = JSON.parse(JSON.stringify(workout.records));
     records.forEach(set => {
       set.actualSets = [];
-    })
+    });
     return this.createWorkout(workout.name, new Date(), records);
   }
 }
