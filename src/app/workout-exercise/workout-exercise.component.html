@@ -49,9 +49,9 @@
         </div>
     </div>
     <div id="buttons">
-        <button type="button" class="btn btn-outline-primary" *ngIf="show_edit !== true" (click)="show_edit = !show_edit">Edit</button>
+        <button type="button" class="btn btn-outline-primary" *ngIf="!workoutComplete && show_edit !== true" (click)="show_edit = !show_edit">Edit</button>
         <button type="button" class="btn btn-outline-danger" *ngIf="show_edit === true" (click)="show_edit = !show_edit">Cancel</button>
-        <button type="button" class="btn btn-outline-danger" *ngIf="show_remove !== true" (click)="show_remove = !show_remove">Remove</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="!workoutComplete && show_remove !== true" (click)="show_remove = !show_remove">Remove</button>
         <button type="button" class="btn btn-outline-danger" *ngIf="show_remove === true" (click)="removeRecord()">Yes Remove Exercise</button>
         <button type="button" class="btn btn-outline-danger" *ngIf="show_remove === true" (click)="show_remove = !show_remove">Cancel</button>
     </div>

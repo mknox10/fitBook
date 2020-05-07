@@ -5,10 +5,10 @@
     </div>
     <div *ngFor="let record of workout.records">
         <div *ngIf="in_progress === false">
-            <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)" (save_exercise)="saveRecord()"></app-workout-exercise>
+            <app-workout-exercise [record]="record" (remove_exercise)="removeRecord($event)" (save_exercise)="saveRecord()" [workoutComplete]="previous_workout"></app-workout-exercise>
         </div>
         <div *ngIf="in_progress === true">
-            <app-workout-in-progress [record]="record"></app-workout-in-progress>
+            <app-workout-in-progress [record]="record" (exerciseComplete)="checkIfShouldFinish()"></app-workout-in-progress>
         </div>
     </div>
     <hr class="my-4">

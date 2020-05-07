@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { Record } from 'src/record';
@@ -12,6 +12,7 @@ import { Set } from 'src/set';
 export class WorkoutInProgressComponent implements OnInit {
 
   @Input() record: Record;
+  @Output() exerciseComplete = new EventEmitter<boolean>();
 
   exerciseForm: FormGroup;
   numSets: number = 0;
@@ -68,5 +69,6 @@ export class WorkoutInProgressComponent implements OnInit {
       }
     }
     this.record.actualSets = actualSets;
+    this.exerciseComplete.emit(true);
   }
 }

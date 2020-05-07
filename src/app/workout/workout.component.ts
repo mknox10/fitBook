@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 import {Workout} from 'src/workout';
-import {Exercise} from 'src/exercise';
 import {Record} from 'src/record';
 import {ExerciseService} from '../exercise.service';
 import {WorkoutService} from '../workout.service';
@@ -86,6 +85,12 @@ export class WorkoutComponent implements OnInit {
     console.log('Finishing Workout');
   }
 
+  checkIfShouldFinish(): void {
+    if (this.workout.records.every(set => set.actualSets.length !== 0)) {
+      this.finishWorkout();
+    }
+  }
+
   addExercise(): void {
     this.addRecord(this.workout);
   }
@@ -130,9 +135,7 @@ export class WorkoutComponent implements OnInit {
 
   addRecord(workout: Workout): Record {
     let record: Record = new Record();
-    let exercise: Exercise = new Exercise();
-    exercise.name = '';
-    record.exercise = exercise;
+    record.exercise = this.es.getExercises()[0];
     record.targetSets = [{
       reps: 0,
       weight: 0
