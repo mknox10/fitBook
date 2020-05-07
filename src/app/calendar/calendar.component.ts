@@ -16,11 +16,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getWorkouts();
-    this.getCalendarWorkouts();
-    // this.calendarWorkouts.forEach(work => {
-    //   console.log(work.id);
-    // });
+    this.refreshWorkouts();
   }
 
   calendarPlugins = [dayGridPlugin];
@@ -58,6 +54,18 @@ export class CalendarComponent implements OnInit {
   refreshWorkouts() {
     this.getWorkouts();
     this.calendarWorkouts = this.workoutsList.map(workout => ({title: workout.name, date: workout.date, allDay: true, stick: true}));
+    if (this.addPastWorkoutForm.get('workout').value === '' ||
+      !this.workoutsList.map(w => w.id).includes(this.addPastWorkoutForm.get('workout').value?.id)) {
+      if (this.workoutsList.length > 0) {
+        this.addPastWorkoutForm.patchValue({
+          workout: this.workoutsList[0].id,
+        });
+      } else {
+        this.addPastWorkoutForm.patchValue({
+          workout: '',
+        });
+      }
+    }
   }
 
   /** form used to add a new workout */

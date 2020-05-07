@@ -31,8 +31,6 @@ export class WorkoutComponent implements OnInit {
   newName: string;
 
   constructor(private es: ExerciseService, private ws: WorkoutService, private route: ActivatedRoute, private router: Router) {
-    es = new ExerciseService();
-    ws = new WorkoutService(es);
   }
 
   ngOnInit(): void {
@@ -44,8 +42,6 @@ export class WorkoutComponent implements OnInit {
     });
 
     this.in_progress = false;
-    this.es = new ExerciseService();
-    this.ws = new WorkoutService(this.es);
     const id = +this.route.snapshot.paramMap.get('id');
 
     this.workout = this.ws.getWorkout(id);
