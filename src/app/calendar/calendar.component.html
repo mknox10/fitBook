@@ -50,8 +50,8 @@
         <div class="container alert alert-secondary">
             <h5>{{workout.name}} on {{workout.date.toDateString()}}</h5>
             <div>
-                <button class="btn btn-primary mr-2" (click)="deleteWorkout(workout)">Remove Workout</button>
                 <button class="btn btn-primary" routerLink="/workout/{{workout.id}}">View Workout</button>
+                <button class="btn btn-outline-danger ml-2" (click)="deleteWorkout(workout)">Remove Workout</button>
             </div>
         </div>
     </div>
