@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { Workout } from 'src/workout';
@@ -30,7 +31,7 @@ export class WorkoutComponent implements OnInit {
   date: String;
   newName: string;
 
-  constructor(private es: ExerciseService, private ws: WorkoutService) {
+  constructor(private es: ExerciseService, private ws: WorkoutService, private route: ActivatedRoute) {
     es = new ExerciseService();
     ws = new WorkoutService(es);
   }
@@ -39,9 +40,15 @@ export class WorkoutComponent implements OnInit {
     this.in_progress = false;
     this.es = new ExerciseService();
     this.ws = new WorkoutService(this.es);
+    const id = +this.route.snapshot.paramMap.get('id');
 
+    this.workout = this.ws.getWorkout(id);
     if (this.workout === undefined) {
-      this.workout = this.ws.loadWorkout();
+      try {
+        this.workout = this.ws.getWorkouts()[0];
+      } catch (Exception) {
+        this.workout = this.ws.createWorkout("New Workout", new Date(), []);
+      }
     }
     this.date = this.workout.date.toLocaleString();
     this.change_name = false;

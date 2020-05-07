@@ -55,6 +55,6 @@ export class WorkoutService {
     records.forEach(set => {
       set.actualSets = [];
     })
-    return this.createWorkout(workout.name.concat(" - Clone"), new Date(), records);
+    return this.createWorkout(workout.name, new Date(), records);
   }
 }

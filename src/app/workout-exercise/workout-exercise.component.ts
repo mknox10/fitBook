@@ -29,9 +29,6 @@ export class WorkoutExerciseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.record.exercise.id === undefined) {
-      this.show_edit = true;
-    }
     this.checkWeight();
   }
 
