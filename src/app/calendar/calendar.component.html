@@ -49,10 +49,10 @@
 </div>
 <!-- Displays lists of workouts and current workouts on calendar -->
 <div class="container mt-4">
-    <nav>
-        <button class="btn btn-primary" (click)="toggleEditor('showAllWorkouts')">All Workouts</button>
-        <button class="btn btn-primary ml-2" (click)="toggleEditor('showCalendarWorkouts')">Calendar Workouts</button>
-    </nav>
+    <div class="btn-group" >
+        <button class="btn btn-primary" [ngClass]="{'active': showAllEditor}" (click)="toggleEditor('showAllWorkouts')">All Workouts</button>
+        <button class="btn btn-primary" [ngClass]="{'active': showCalendarEditor}" (click)="toggleEditor('showCalendarWorkouts')">Calendar Workouts</button>
+    </div>
     <hr>
 </div>
 <div *ngIf="showAllEditor">
