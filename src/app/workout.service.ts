@@ -37,6 +37,7 @@ export class WorkoutService {
       name,
       date,
       records,
+      onCalendar: true
     };
     this.workouts.push(workout);
     return workout;
@@ -56,5 +57,9 @@ export class WorkoutService {
       set.actualSets = [];
     });
     return this.createWorkout(workout.name, new Date(), records);
+  }
+
+  removeWorkoutFromCalendar(workout: Workout) {
+    workout.onCalendar = false;
   }
 }

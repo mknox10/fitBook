@@ -5,6 +5,8 @@ import {Workout} from 'src/workout';
 import {Record} from 'src/record';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
+export type EditorType = 'showAllWorkouts' | 'showCalendarWorkouts';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -30,13 +32,14 @@ export class CalendarComponent implements OnInit {
   date: any;
   records: Record[];
   value: number;
+  removeButton: boolean;
 
   /** get workouts from workout service */
   getWorkouts() {
     this.workoutsList = this.workoutService.getWorkouts();
   }
 
-  /** from each workout in the list, grab correct information for calendar event and add to calendar workouts array */
+  /** from each workout in the list, grab correct information for calendar event and add to calendar workouts array 
   getCalendarWorkouts() {
     for (let workout of this.workoutsList) {
       this.workout = workout;
@@ -44,16 +47,17 @@ export class CalendarComponent implements OnInit {
       this.date = this.workout.date;
       this.addWorkoutsToCalendar(this.title, this.date);
     }
-  }
+  } */
 
-  /** method called to push new event onto calendar array */
+  /** method called to push new event onto calendar array 
   addWorkoutsToCalendar(title: string, date: Date) {
     this.calendarWorkouts.push({title: title, date: date, allDay: true, stick: true});
-  }
+  } */
+
 
   refreshWorkouts() {
     this.getWorkouts();
-    this.calendarWorkouts = this.workoutsList.map(workout => ({title: workout.name, date: workout.date, allDay: true, stick: true}));
+    this.calendarWorkouts = this.workoutsList.filter(workout => { if(workout.onCalendar === true) { return workout }}).map(workout => ({title: workout.name, date: workout.date, allDay: true, stick: true}));
     if (this.addPastWorkoutForm.get('workout').value === '' ||
       !this.workoutsList.map(w => w.id).includes(this.addPastWorkoutForm.get('workout').value?.id)) {
       if (this.workoutsList.length > 0) {
@@ -77,8 +81,7 @@ export class CalendarComponent implements OnInit {
 
   correctWorkoutDate: string;
 
-  addWorkout(event: Event) {
-    event.preventDefault();
+  addWorkout() {
     this.records = [];
     this.correctWorkoutDate = this.getNewDay(this.addWorkoutForm.get('date').value);
     this.workoutService.createWorkout(this.addWorkoutForm.get('title').value, new Date(this.correctWorkoutDate), this.records);
@@ -130,5 +133,23 @@ export class CalendarComponent implements OnInit {
     this.refreshWorkouts();
   }
 
+  removeWorkoutFromCalendar(workout: Workout) {
+    this.workoutService.removeWorkoutFromCalendar(workout);
+    this.refreshWorkouts();
+  }
+
+  editor: EditorType = 'showAllWorkouts';
+
+  get showAllEditor() {
+    return this.editor === 'showAllWorkouts';
+  }
+
+  get showCalendarEditor() {
+    return this.editor === 'showCalendarWorkouts';
+  }
+
+  toggleEditor(type: EditorType) {
+    this.editor = type;
+  }
 
 }
