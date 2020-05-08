@@ -5,4 +5,5 @@ export class Workout {
   name: string;
   date: Date;
   records: Record[];
+  onCalendar: boolean;
 }

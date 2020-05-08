@@ -61,7 +61,8 @@ export const WORKOUTS: Workout[] = [
                 ],
                 actualSets: []
             }
-        ]
+        ],
+        onCalendar: true
     },
     {
         id: 2,
@@ -140,7 +141,8 @@ export const WORKOUTS: Workout[] = [
                 ],
                 actualSets: []
             }
-        ]
+        ],
+        onCalendar: true
     },
     {
         id: 3,
@@ -201,7 +203,8 @@ export const WORKOUTS: Workout[] = [
                 ],
                 actualSets: []
             }
-        ]
+        ],
+        onCalendar: true
     },
     {
         id: 4,
@@ -280,6 +283,7 @@ export const WORKOUTS: Workout[] = [
                 ],
                 actualSets: []
             }
-        ]
+        ],
+        onCalendar: true
     }
 ]
