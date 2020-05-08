@@ -62,4 +62,9 @@ export class WorkoutService {
     workout.onCalendar = false;
     this.saveWorkout(workout);
   }
+
+  addWorkoutToCalendar(workout: Workout) {
+    workout.onCalendar = true;
+    this.saveWorkout(workout);
+  }
 }

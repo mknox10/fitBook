@@ -28,33 +28,17 @@ export class CalendarComponent implements OnInit {
   calendarWorkouts = [];
 
   workout: Workout;
-  title: any;
-  date: any;
   records: Record[];
   value: number;
   removeButton: boolean;
+  active: boolean;
 
   /** get workouts from workout service */
   getWorkouts() {
     this.workoutsList = this.workoutService.getWorkouts();
   }
 
-  /** from each workout in the list, grab correct information for calendar event and add to calendar workouts array 
-  getCalendarWorkouts() {
-    for (let workout of this.workoutsList) {
-      this.workout = workout;
-      this.title = this.workout.name;
-      this.date = this.workout.date;
-      this.addWorkoutsToCalendar(this.title, this.date);
-    }
-  } */
-
-  /** method called to push new event onto calendar array 
-  addWorkoutsToCalendar(title: string, date: Date) {
-    this.calendarWorkouts.push({title: title, date: date, allDay: true, stick: true});
-  } */
-
-
+  /** refresh calendar and workouts */
   refreshWorkouts() {
     this.getWorkouts();
     this.calendarWorkouts = this.workoutsList.filter(workout => { if(workout.onCalendar === true) { return workout }}).map(workout => ({title: workout.name, date: workout.date, allDay: true, stick: true}));
@@ -79,8 +63,8 @@ export class CalendarComponent implements OnInit {
     workout: new FormControl('')
   });
 
+  /** method creates a new workout blank workout that the user can edit and view */
   correctWorkoutDate: string;
-
   addWorkout() {
     this.records = [];
     this.correctWorkoutDate = this.getNewDay(this.addWorkoutForm.get('date').value);
@@ -95,6 +79,18 @@ export class CalendarComponent implements OnInit {
     date: new FormControl('', [Validators.required]),
     workout: new FormControl('', [Validators.required])
   });
+
+  /** method creates a new workout using the records from the past workout and adds the new workout to the calendar */
+  correctPastWorkoutDate: string;
+  addPastWorkout() {
+    this.correctPastWorkoutDate = this.getNewDay(this.addPastWorkoutForm.get('date').value);
+    const workout = this.workoutService.cloneWorkout(this.workoutService.getWorkout(+this.addPastWorkoutForm.get('workout').value));
+    workout.name = this.addPastWorkoutForm.get('title').value;
+    workout.date = new Date(this.correctPastWorkoutDate);
+    this.workoutService.saveWorkout(workout);
+    this.addPastWorkoutForm.reset();
+    this.refreshWorkouts();
+  }
 
   /** method to correct for a date bug in the fullcalendar */
   correctDate: string;
@@ -112,19 +108,6 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  /** method creates a new workout using the records from the past workout and adds the new workout to the calendar */
-  correctPastWorkoutDate: string;
-
-  addPastWorkout() {
-    this.correctPastWorkoutDate = this.getNewDay(this.addPastWorkoutForm.get('date').value);
-    const workout = this.workoutService.cloneWorkout(this.workoutService.getWorkout(+this.addPastWorkoutForm.get('workout').value));
-    workout.name = this.addPastWorkoutForm.get('title').value;
-    workout.date = new Date(this.correctPastWorkoutDate);
-    this.workoutService.saveWorkout(workout);
-    this.addPastWorkoutForm.reset();
-    this.refreshWorkouts();
-  }
-
   /** deletes a workout */
   index: number;
   deleteWorkout(workout: Workout) {
@@ -138,6 +121,13 @@ export class CalendarComponent implements OnInit {
     this.refreshWorkouts();
   }
 
+  /** adds a workout from workouts list to the calendar if it is not already on there */
+  addWorkoutToCalendar(workout: Workout) {
+    this.workoutService.addWorkoutToCalendar(workout);
+    this.refreshWorkouts();
+  }
+
+  /** Toggle views between all workouts list and current workouts on calendar */
   editor: EditorType = 'showAllWorkouts';
 
   get showAllEditor() {
