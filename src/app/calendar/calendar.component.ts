@@ -125,14 +125,14 @@ export class CalendarComponent implements OnInit {
     this.refreshWorkouts();
   }
 
-  /** removes a workout from the calendar but does not delete the workout from the WORKOUTS database */
+  /** deletes a workout */
   index: number;
-
   deleteWorkout(workout: Workout) {
     this.workoutService.removeWorkout(workout.id);
     this.refreshWorkouts();
   }
 
+  /** removes a workout from the calendar but does not delete the workout from the WORKOUTS database */
   removeWorkoutFromCalendar(workout: Workout) {
     this.workoutService.removeWorkoutFromCalendar(workout);
     this.refreshWorkouts();

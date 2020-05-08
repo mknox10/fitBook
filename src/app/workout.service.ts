@@ -61,5 +61,6 @@ export class WorkoutService {
 
   removeWorkoutFromCalendar(workout: Workout) {
     workout.onCalendar = false;
+    this.saveWorkout(workout);
   }
 }
