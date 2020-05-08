@@ -32,8 +32,7 @@ export class WorkoutService {
 
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
-      //id: this.id++,
-      id: WORKOUTS[WORKOUTS.length-1].id++,
+      id: this.workouts.map(w => w.id).sort((a, b) => b - a)[0] + 1,
       name,
       date,
       records,
