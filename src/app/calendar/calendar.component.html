@@ -49,22 +49,22 @@
 </div>
 <!-- Displays lists of workouts and current workouts on calendar -->
 <div class="container mt-4">
-    <nav>
-        <button class="btn btn-primary" (click)="toggleEditor('showAllWorkouts')">All Workouts</button>
-        <button class="btn btn-primary ml-2" (click)="toggleEditor('showCalendarWorkouts')">Calendar Workouts</button>
-    </nav>
+    <div class="btn-group" >
+        <button class="btn btn-primary" [ngClass]="{'active': showAllEditor}" (click)="toggleEditor('showAllWorkouts')">All Workouts</button>
+        <button class="btn btn-primary" [ngClass]="{'active': showCalendarEditor}" (click)="toggleEditor('showCalendarWorkouts')">Calendar Workouts</button>
+    </div>
     <hr>
 </div>
 <div *ngIf="showAllEditor">
     <div class="container mt-4">
-        <div *ngFor='let workout of workoutsList' [ngClass]="{'active': workout.active}">
+        <div *ngFor='let workout of workoutsList' [ngClass]="{'active': active[workout.id]}">
             <div class="container alert alert-secondary">
                 <h5>{{workout.name}} on {{workout.date.toDateString()}}</h5>
                 <div>
-                    <button class="btn btn-primary" routerLink="/workout/{{workout.id}}">View Workout</button>
-                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton !== true"(click)="removeButton = !removeButton; workout.active = !workout.active">Delete Workout</button>
-                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton === true && workout.active" (click)="deleteWorkout(workout); removeButton = !removeButton">Yes Delete Workout</button>
-                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton === true && workout.active" (click)="removeButton = !removeButton; workout.active = !workout.active">Cancel</button>
+                    <button class="btn btn-primary" routerLink="/workout/{{+workout.id}}">View Workout</button>
+                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton !== true"(click)="removeButton = !removeButton; active[workout.id] = !active[workout.id]">Delete Workout</button>
+                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton === true && active[workout.id]" (click)="deleteWorkout(workout); removeButton = !removeButton">Yes Delete Workout</button>
+                    <button class="btn btn-outline-danger ml-2" *ngIf="removeButton === true && active[workout.id]" (click)="removeButton = !removeButton; active[workout.id] = !active[workout.id]">Cancel</button>
                     <button class="btn btn-primary float-right" *ngIf="workout.onCalendar === false" (click)="addWorkoutToCalendar(workout)">Add Workout to Calendar</button>
                 </div>
             </div>

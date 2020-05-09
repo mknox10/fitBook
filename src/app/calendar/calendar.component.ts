@@ -31,7 +31,7 @@ export class CalendarComponent implements OnInit {
   records: Record[];
   value: number;
   removeButton: boolean;
-  active: boolean;
+  active = {};
 
   /** get workouts from workout service */
   getWorkouts() {
@@ -54,6 +54,9 @@ export class CalendarComponent implements OnInit {
         });
       }
     }
+    this.workoutsList.forEach(workout => {
+      this.active[workout.id] = false;
+    });
   }
 
   /** form used to add a new workout */
