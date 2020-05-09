@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {Workout} from '../workout';
 import {Record} from 'src/record';
 import {ExerciseService} from './exercise.service';
-import { WORKOUTS } from './dbworkout-list';
-import { Exercise } from 'src/exercise';
+import {WORKOUTS} from './dbworkout-list';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +10,11 @@ import { Exercise } from 'src/exercise';
 export class WorkoutService {
 
   workouts: Workout[] = WORKOUTS;
+
   //id: number = 0;
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private exerciseService: ExerciseService) {
+  }
 
   getWorkouts(): Workout[] {
     return this.workouts;
@@ -25,14 +26,14 @@ export class WorkoutService {
 
   loadWorkout(): Workout {
     if (this.workouts.length === 0) {
-      return this.createWorkout("New Workout", new Date(), []);
+      return this.createWorkout('New Workout', new Date(), []);
     }
     return this.workouts[0];
   }
 
   createWorkout(name: string, date: Date, records: Record[]): Workout {
     const workout: Workout = {
-      id: this.workouts.map(w => w.id).sort((a, b) => b - a)[0] + 1,
+      id: (this.workouts.map(w => w.id).sort((a, b) => b - a)[0] || 1) + 1,
       name,
       date,
       records,
